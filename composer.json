@@ -1,0 +1,20 @@
+{
+    "name": "nwiry/bompix-sdk-php",
+    "description": "PHP SDK para utilização dos métodos da API Rest BomPix.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Nwiry\\BompixSDK\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diogo Cerqueira",
+            "email": "contato@diogocerqueira.dev.br"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}
