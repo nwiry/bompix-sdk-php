@@ -6,7 +6,7 @@ use JsonSerializable;
 
 class Link implements JsonSerializable
 {
-    public $slug;
+    public string $slug;
 
     public function __construct(?string $slug = NULL)
     {
