@@ -92,7 +92,7 @@ class AuthRequest extends RequestBase
     /**
      * login inicializa a autenticação do usuário e atribui os dados do token para interação com a aplicação à classe de resposta
      *
-     * @return void
+     * @return \Nwiry\BompixSDK\Request\AuthRequest
      */
     public function login()
     {
