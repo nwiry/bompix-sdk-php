@@ -1,15 +1,14 @@
 <?php
 
-namespace Nwiry\BompixSDK;
+namespace Nwiry\BompixSDK\Request;
 
 use Nwiry\BompixSDK\Exception\BomPixException;
-use Nwiry\BompixSDK\Request\RequestBase;
 use Nwiry\BompixSDK\Response\Auth as ResponseAuth;
 
 /**
- * Auth oferece métodos para autenticação na API Bompix.
+ * AuthRequest oferece métodos para autenticação na API Bompix.
  */
-class Auth extends RequestBase
+class AuthRequest extends RequestBase
 {
     /**
      * __construct
@@ -28,11 +27,11 @@ class Auth extends RequestBase
      * setApiKey Define a chave de API.
      *
      * @param string $apiKey A chave de API.
-     * @return void
      */
-    public function setApiKey(string $apiKey): void
+    public function setApiKey(string $apiKey)
     {
         $this->apiKey = $apiKey;
+        return $this;
     }
 
     /**
@@ -49,11 +48,11 @@ class Auth extends RequestBase
      * setApiSecret Define a chave secreta de API.
      *
      * @param string $apiSecret A chave secreta de API.
-     * @return void
      */
-    public function setApiSecret(string $apiSecret): void
+    public function setApiSecret(string $apiSecret)
     {
         $this->apiSecret = $apiSecret;
+        return $this;
     }
 
     /**
@@ -66,9 +65,10 @@ class Auth extends RequestBase
         return $this->apiSecret;
     }
 
-    public function setResponse($response): void
+    public function setResponse($response)
     {
         $this->response = new ResponseAuth($response);
+        return $this;
     }
 
     public function getResponse(): ResponseAuth
@@ -92,13 +92,13 @@ class Auth extends RequestBase
 
         try {
             $this->executeRequest("DELETE", $this);
-            $this->apiKey    = $_apiKey;
-            $this->apiSecret = $_apiSecret;
+            $this->apiKey      = $_apiKey;
+            $this->apiSecret   = $_apiSecret;
             $this->accessToken = NULL;
             $this->setResponse(NULL);
         } catch (\Nwiry\BompixSDK\Exception\BomPixException $e) {
-            $this->apiKey    = $_apiKey;
-            $this->apiSecret = $_apiSecret;
+            $this->apiKey      = $_apiKey;
+            $this->apiSecret   = $_apiSecret;
             $this->accessToken = NULL;
             throw new BomPixException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
