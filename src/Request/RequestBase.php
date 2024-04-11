@@ -5,6 +5,7 @@ namespace Nwiry\BompixSDK\Request;
 use GuzzleHttp\Client;
 use JsonSerializable;
 use Nwiry\BompixSDK\Exception\BomPixException;
+use Nwiry\BompixSDK\Response\Auth;
 
 /**
  * RequestBase fornece funcionalidades básicas para fazer requisições à API Bompix.
@@ -15,7 +16,7 @@ abstract class RequestBase
     private const API_ENDPOINT = "https://app.bompix.com.br/api/v1";
 
     // Rota da requisição
-    private string $route;
+    protected string $route;
 
     protected $accessToken;
     protected $apiKey;
@@ -23,9 +24,15 @@ abstract class RequestBase
 
     public $response;
 
+    public function __construct(?Auth $auth = NULL)
+    {
+        if ($auth) $this->accessToken = $auth->token;
+    }
+
     protected function setRoute(string $route)
     {
         $this->route = $route;
+        return $this;
     }
 
     /**
@@ -61,9 +68,8 @@ abstract class RequestBase
     /**
      * setResponse define a resposta da requisição na classe definida em seus respectivos atributos.
      * @param mixed $response A resposta da requisição.
-     * @return void
      */
-    abstract public function setResponse($response): void;
+    abstract public function setResponse($response);
 
     /**
      * executeRequest executa uma requisição à API Bompix.
@@ -94,8 +100,9 @@ abstract class RequestBase
 
             // Verifica o código de status da resposta e atribue a resposta à classe definida
             if (in_array($response->getStatusCode(), [200, 201, 204])) {
-                if (!in_array(strtoupper($method), ["GET", "POST"])) return var_dump($response->getBody()->getContents());
-                return $authorization->setResponse(json_decode($response->getBody()->getContents(), true));
+                if (!in_array(strtoupper($method), ["GET", "POST"])) return;
+                $authorization->setResponse(json_decode($response->getBody()->getContents(), true));
+                return;
             }
 
             throw new BomPixException("Erro ao executar a requisição: " . $response->getStatusCode());
