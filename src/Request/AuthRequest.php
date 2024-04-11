@@ -27,6 +27,7 @@ class AuthRequest extends RequestBase
      * setApiKey Define a chave de API.
      *
      * @param string $apiKey A chave de API.
+     * @return \Nwiry\BompixSDK\Request\AuthRequest
      */
     public function setApiKey(string $apiKey)
     {
@@ -48,6 +49,7 @@ class AuthRequest extends RequestBase
      * setApiSecret Define a chave secreta de API.
      *
      * @param string $apiSecret A chave secreta de API.
+     * @return \Nwiry\BompixSDK\Request\AuthRequest
      */
     public function setApiSecret(string $apiSecret)
     {
@@ -64,26 +66,49 @@ class AuthRequest extends RequestBase
     {
         return $this->apiSecret;
     }
-
+    
+    /**
+     * setResponse define a classe que salva os dados da requisição
+     *
+     * @param  mixed $response
+     * @return \Nwiry\BompixSDK\Request\AuthRequest
+     */
     public function setResponse($response)
     {
         $this->response = new ResponseAuth($response);
         return $this;
     }
-
+    
+    /**
+     * getResponse retorna os dados salvos na última requisição de autenticação
+     *
+     * @return @return \Nwiry\BompixSDK\Response\Auth
+     */
     public function getResponse(): ResponseAuth
     {
         return $this->response;
     }
-
+    
+    /**
+     * login inicializa a autenticação do usuário e atribui os dados do token para interação com a aplicação à classe de resposta
+     *
+     * @return void
+     */
     public function login()
     {
         $this->executeRequest("POST", $this);
         return $this;
     }
-
+    
+    /**
+     * logout destroi o token fornecido na autenticação
+     *
+     * @return void
+     */
     public function logout()
     {
+        // Cria uma pequena cache das chaves de autenticação para não perder esses dados
+        // em um eventual erro de requisição
         $_apiKey    = $this->apiKey;
         $_apiSecret = $this->apiSecret;
 
