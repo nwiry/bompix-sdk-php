@@ -25,8 +25,8 @@ class Link implements JsonSerializable
         return $this;
     }
 
-    public function getSlug(string $slug)
+    public function getSlug()
     {
-        $this->slug = $slug;
+        return $this->slug;
     }
 }

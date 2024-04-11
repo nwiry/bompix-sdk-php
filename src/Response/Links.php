@@ -10,8 +10,8 @@ final class Links
     public $payload;
 
     public function __construct($response)
-    {
-        if (is_null($response)) {
+    {   
+        if(is_null($response)) {
             $this->payload = [];
             return;
         };
