@@ -13,11 +13,11 @@ class WebhookRequest extends RequestBase
 {
     private $webhook;
 
-    public function __construct(Auth $auth, Link $link)
+    public function __construct(Auth $auth, Webhook $webhook)
     {
         parent::__construct($auth);
         $this->setRoute("/webhook");
-        $this->webhook = $link;
+        $this->webhook = $webhook;
     }
 
     public function setWebhook(Webhook $link)

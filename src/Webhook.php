@@ -6,8 +6,8 @@ use JsonSerializable;
 
 class Webhook implements JsonSerializable
 {
-    public $link_id;
-    public $url;
+    public int $link_id;
+    public string $url;
 
     public function __construct(int $link_id = 0, string $url = "")
     {
