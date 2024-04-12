@@ -29,6 +29,11 @@ abstract class RequestBase
         if ($auth) $this->accessToken = $auth->token;
     }
 
+    /**
+     * setRoute define a rota da API que a classe irá interagir
+     *
+     * @return Nwiry\BompixSDK\Request\RequestBase
+     */
     protected function setRoute(string $route)
     {
         $this->route = $route;

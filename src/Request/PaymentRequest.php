@@ -14,7 +14,7 @@ class PaymentRequest extends RequestBase
     public function __construct(Auth $auth, Payment $payment)
     {
         parent::__construct($auth);
-        $this->setRoute("/webhook");
+        $this->setRoute("/payment");
         $this->payment = $payment;
     }
 
@@ -31,6 +31,7 @@ class PaymentRequest extends RequestBase
 
     public function setResponse($response)
     {
+        var_dump($response);
         if (isset($response["payload"]["uuid"])) $this->response = new ResponsePayment($response);
         else $this->response = $response;
         return $this;

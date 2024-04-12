@@ -108,7 +108,7 @@ class LinkRequest extends RequestBase
      *
      * @param  mixed $id
      * @param  mixed $slug
-     * @return ResponseLink
+     * @return Nwiry\BompixSDK\Response\Link|Nwiry\BompixSDK\Response\Links
      */
     public function get(?int $id = NULL, ?string $slug = NULL): ResponseLink|ResponseLinks
     {

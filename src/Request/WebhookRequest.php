@@ -2,17 +2,27 @@
 
 namespace Nwiry\BompixSDK\Request;
 
-use Nwiry\BompixSDK\Link;
 use Nwiry\BompixSDK\Response\Auth;
-use Nwiry\BompixSDK\Response\Links as ResponseLinks;
 use Nwiry\BompixSDK\Response\Webhook as ResponseWebhook;
 use Nwiry\BompixSDK\Response\Webhooks;
 use Nwiry\BompixSDK\Webhook;
 
+/**
+ * WebhookRequest oferece métodos para interação com a rota de links.
+ */
 class WebhookRequest extends RequestBase
 {
+    /**
+     * @var \Nwiry\BompixSDK\Webhook $webhook O webhook associado à requisição.
+     */
     private $webhook;
-
+        
+    /**
+     * __construct
+     *
+     * @param \Nwiry\BompixSDK\Response\Auth $auth O objeto de autenticação.
+     * @param \Nwiry\BompixSDK\Webhook $webhook O webhook associado à requisição.
+     */
     public function __construct(Auth $auth, Webhook $webhook)
     {
         parent::__construct($auth);
@@ -20,17 +30,34 @@ class WebhookRequest extends RequestBase
         $this->webhook = $webhook;
     }
 
-    public function setWebhook(Webhook $link)
+    /**
+     * setWebhook Define o webhook associado à requisição.
+     *
+     * @param Webhook $webhook O webhook associado à requisição.
+     * @return \Nwiry\BompixSDK\Request\WebhookRequest
+     */
+    public function setWebhook(Webhook $webhook)
     {
-        $this->webhook = $link;
+        $this->webhook = $webhook;
         return $this;
     }
 
+    /**
+     * getWebhook Obtém o webhook associado à requisição.
+     *
+     * @return Webhook O webhook associado à requisição.
+     */
     public function getWebhook()
     {
         return $this->webhook;
     }
 
+    /**
+     * setResponse Define a resposta da requisição.
+     *
+     * @param mixed $response A resposta da requisição.
+     * @return \Nwiry\BompixSDK\Request\WebhookRequest
+     */
     public function setResponse($response)
     {
         if (isset($response["payload"]["id"])) $this->response = new ResponseWebhook($response);
@@ -38,17 +65,33 @@ class WebhookRequest extends RequestBase
         return $this;
     }
 
+    /**
+     * getResponse Obtém a resposta da requisição.
+     *
+     * @return \Nwiry\BompixSDK\Response\Webhook A resposta da requisição.
+     */
     public function getResponse(): ResponseWebhook
     {
         return $this->response;
     }
 
+    /**
+     * create Cria um novo webhook.
+     *
+     * @return \Nwiry\BompixSDK\Request\WebhookRequest
+     */
     public function create()
     {
         $this->executeRequest("POST", $this, $this->webhook);
         return $this;
     }
 
+    /**
+     * delete Deleta um webhook pelo seu ID.
+     *
+     * @param int $id O ID do webhook a ser deletado.
+     * @return void
+     */
     public function delete(int $id)
     {
         $_route = $this->route;
@@ -61,6 +104,12 @@ class WebhookRequest extends RequestBase
         }
     }
 
+    /**
+     * get Obtém um webhook pelo seu ID.
+     *
+     * @param int|null $id O ID do webhook a ser obtido.
+     * @return \Nwiry\BompixSDK\Response\Webhook|\Nwiry\BompixSDK\Response\Webhooks A resposta da requisição.
+     */
     public function get(?int $id = NULL): ResponseWebhook|Webhooks
     {
         $_route = $this->route;

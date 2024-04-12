@@ -5,8 +5,8 @@ namespace Nwiry\BompixSDK\Exception;
 use Exception;
 
 /**
- * BomPixException
+ * BomPixException é a exceção personalizada lançada em caso de erros específicos relacionados ao SDK Bompix.
  */
-class BomPixException extends Exception {
-
+class BomPixException extends Exception
+{
 }
