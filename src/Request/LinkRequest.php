@@ -2,6 +2,7 @@
 
 namespace Nwiry\BompixSDK\Request;
 
+use Nwiry\BompixSDK\Exception\BomPixException;
 use Nwiry\BompixSDK\Link;
 use Nwiry\BompixSDK\Response\Auth;
 use Nwiry\BompixSDK\Response\Link as ResponseLink;
@@ -129,6 +130,7 @@ class LinkRequest extends RequestBase
             return new ResponseLinks($this->response);
         } catch (\Nwiry\BompixSDK\Exception\BomPixException $th) {
             $this->setRoute($_route);
+            throw new BomPixException($th->getMessage(), $th->getCode(), $th->getPrevious());
         }
     }
 }

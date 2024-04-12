@@ -2,6 +2,7 @@
 
 namespace Nwiry\BompixSDK\Request;
 
+use Nwiry\BompixSDK\Exception\BomPixException;
 use Nwiry\BompixSDK\Payment;
 use Nwiry\BompixSDK\Response\Auth;
 use Nwiry\BompixSDK\Response\Payment as ResponsePayment;
@@ -11,7 +12,7 @@ class PaymentRequest extends RequestBase
 {
     private $payment;
 
-    public function __construct(Auth $auth, Payment $payment)
+    public function __construct(Auth $auth, ?Payment $payment = NULL)
     {
         parent::__construct($auth);
         $this->setRoute("/payment");
@@ -31,7 +32,6 @@ class PaymentRequest extends RequestBase
 
     public function setResponse($response)
     {
-        var_dump($response);
         if (isset($response["payload"]["uuid"])) $this->response = new ResponsePayment($response);
         else $this->response = $response;
         return $this;
@@ -61,6 +61,7 @@ class PaymentRequest extends RequestBase
             return new Payments($this->response);
         } catch (\Nwiry\BompixSDK\Exception\BomPixException $th) {
             $this->setRoute($_route);
+            throw new BomPixException($th->getMessage(), $th->getCode(), $th->getPrevious());
         }
     }
 }

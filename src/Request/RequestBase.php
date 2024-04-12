@@ -112,7 +112,6 @@ abstract class RequestBase
 
             throw new BomPixException("Erro ao executar a requisição: " . $response->getStatusCode());
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            var_dump($e->getResponse()->getBody()->getContents());
             throw new BomPixException("Erro ao executar a requisição: " . $e->getMessage());
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
             throw new BomPixException("Erro ao executar a requisição: " . $e->getMessage());

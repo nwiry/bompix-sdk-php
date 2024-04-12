@@ -2,6 +2,7 @@
 
 namespace Nwiry\BompixSDK\Request;
 
+use Nwiry\BompixSDK\Exception\BomPixException;
 use Nwiry\BompixSDK\Response\Auth;
 use Nwiry\BompixSDK\Response\Webhook as ResponseWebhook;
 use Nwiry\BompixSDK\Response\Webhooks;
@@ -123,6 +124,7 @@ class WebhookRequest extends RequestBase
             return new Webhooks($this->response);
         } catch (\Nwiry\BompixSDK\Exception\BomPixException $th) {
             $this->setRoute($_route);
+            throw new BomPixException($th->getMessage(), $th->getCode(), $th->getPrevious());
         }
     }
 }
