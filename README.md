@@ -168,6 +168,9 @@ $webhook = (new WebhookRequest($responseAuth, $data))->delete($webhook->id);
 ###### Processando notificações de pagamento (Webhooks)
 ----
 ```php
+use Nwiry\BompixSDK\Notification;
+use Nwiry\BompixSDK\Request\PaymentRequest;
+
 // Inicialize a instância de notificação na rota do seu webhook
 $notification = new Notification();
 
