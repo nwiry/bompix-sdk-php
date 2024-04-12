@@ -165,9 +165,23 @@ $webhook = (new WebhookRequest($responseAuth, $data))->get();
 $webhook = (new WebhookRequest($responseAuth, $data))->delete($webhook->id);
 ```
 
+###### Processando notificações de pagamento (Webhooks)
+----
+```php
+// Inicialize a instância de notificação na rota do seu webhook
+$notification = new Notification();
+
+// Processe os dados da notificação de pagamento recebida
+$event = $notification->processNotification();
+
+// Como medida de segurança adicional, utilize a API para verificar a veracidade da notificação:
+$payment = (new PaymentRequest($responseAuth))->get($event->uuid);
+$payment->paid ? "Pagamento efetuado com sucesso" : "O pagamento ainda não foi efetuado";
+```
+
 #### Tratando Execeções
 
->>> Durante o uso dos métodos para interação com as rotas da API, você pode se deparar com erros durante o caminho, por isso, é importante que você importe também a classe de exceção da biblioteca, para tratar esses possíveis erros, e, manter o bom funcionamento da sua aplicação
+> Durante o uso dos métodos para interação com as rotas da API, você pode se deparar com erros durante o caminho, por isso, é importante que você importe também a classe de exceção da biblioteca, para tratar esses possíveis erros, e, manter o bom funcionamento da sua aplicação
 ----
 ###### Exemplo de tratamento de exceção:
 ---
@@ -181,4 +195,3 @@ try {
     // De acordo com as regras da sua aplicação, utilize a mensagem da exceção para prosseguir com as regras do seu funcionamento
 }
 ```
-```php
