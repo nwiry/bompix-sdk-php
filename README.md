@@ -1,4 +1,4 @@
-# BomPix PHP SDK - v1.0.0
+# BomPix PHP SDK - v1.1.0
 
 PHP SDK para utilização dos métodos da API Rest BomPix de forma prática e fácil.
 
