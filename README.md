@@ -143,7 +143,7 @@ use Nwiry\BompixSDK\Webhook;
 // Criando um novo webhook para receber notificações:
 
 // Caso não tenha o id do seu link salvo, obtenha-o via API.
-$link = (new LinkRequest($responseAuth, (new Link("panelsecondary"))))->get(slug: $link->slug);
+$link = (new LinkRequest($responseAuth, (new Link("nomedomeulink"))))->get(slug: $link->slug);
 
 $data = new Webhook($link->id, "{SUA_URL_PARA_NOTIFICAÇÃO}");
 $webhook = (new WebhookRequest($responseAuth, $data))->create()->getResponse();
