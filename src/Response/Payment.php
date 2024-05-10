@@ -79,10 +79,10 @@ final class Payment
             $response["payload"]["email"] ?? ""
         );
         $this->paid         = $response["payload"]["paid"];
-        $this->date_time    = $response["payload"]["date_time"] ?? NULL;
-        $this->qrcode       = $response["payload"]["qrcode"]    ?? NULL;
-        $this->qrcode_png   = $response["payload"]["qrcode"]    ?? NULL;
-        $this->type         = $response["payload"]["type"]      ?? "pix";
+        $this->date_time    = $response["payload"]["date_time"]    ?? NULL;
+        $this->qrcode       = $response["payload"]["qrcode"]       ?? NULL;
+        $this->qrcode_png   = $response["payload"]["qrcode_png"]   ?? NULL;
+        $this->type         = $response["payload"]["type"]         ?? "pix";
         $this->pix_duration = $response["payload"]["pix_duration"] ?? NULL;
     }
 }
