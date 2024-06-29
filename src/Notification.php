@@ -30,6 +30,7 @@ class Notification
     public function __construct(string $version = Notification::BOMPIX_API_V1)
     {
         $this->validVersion($version);
+        $this->version = $version;
     }
 
     /**
@@ -55,6 +56,7 @@ class Notification
     public function setVersion(string $version)
     {
         $this->validVersion($version);
+        $this->version = $version;
         return $this;
     }
 

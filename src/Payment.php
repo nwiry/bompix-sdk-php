@@ -42,7 +42,7 @@ class Payment implements JsonSerializable
         $this->amount  = $amount;
         $this->type    = "pix";
         $this->link_id = $link_id;
-        $this->message = $paymentMessage ?: new PaymentMessage();
+        $this->message = $paymentMessage ?? new PaymentMessage();
     }
 
     /**
